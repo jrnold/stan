@@ -226,16 +226,19 @@ namespace stan {
     template <bool propto,
               typename T_y, 
               typename T_F, typename T_G,
-              typename T_V, typename T_W
+              typename T_V, typename T_W,
+              typename T_m0, typename T_C0
               >
-    typename boost::math::tools::promote_args<T_y,T_F,T_G,T_V,T_W>::type
+    typename boost::math::tools::promote_args<T_y, typename boost::math::tools::promote_args<T_F,T_G,T_V,T_W,T_m0,T_C0>::type >::type
     gaussian_dlm_log(const Eigen::Matrix<T_y,Eigen::Dynamic,Eigen::Dynamic>& y,
                      const Eigen::Matrix<T_F,Eigen::Dynamic,Eigen::Dynamic>& F,
                      const Eigen::Matrix<T_G,Eigen::Dynamic,Eigen::Dynamic>& G,
                      const Eigen::Matrix<T_V,Eigen::Dynamic,1>& V,
-                     const Eigen::Matrix<T_W,Eigen::Dynamic,Eigen::Dynamic>& W) {
+                     const Eigen::Matrix<T_W,Eigen::Dynamic,Eigen::Dynamic>& W,
+                     const Eigen::Matrix<T_m0,Eigen::Dynamic,1>& m0,
+                     const Eigen::Matrix<T_C0,Eigen::Dynamic,Eigen::Dynamic>& C0) {
       static const char* function = "stan::prob::dlm_log(%1%)";
-      typedef typename boost::math::tools::promote_args<T_y,T_F,T_G,T_V,T_W>::type T_lp;
+      typedef typename boost::math::tools::promote_args<T_y, typename boost::math::tools::promote_args<T_F,T_G,T_V,T_W>::type >::type T_lp;
       T_lp lp(0.0);
       
       using stan::math::add;
@@ -297,25 +300,12 @@ namespace stan {
         lp += 0.5 * NEG_LOG_TWO_PI * r * T;
       }
       
-      if (include_summand<propto,T_y,T_F,T_G,T_V,T_W>::value) {
+      if (include_summand<propto,T_y,T_F,T_G,T_V,T_W,T_m0,T_C0>::value) {
         // TODO: initial values of m and C should be arguments.
         // however that would create too many args for
         // boost::math::tools::promote_args (max 6)
         // and would require altering function signatures in the
         // parser to accept more arguments.
-        Eigen::Matrix<T_lp, Eigen::Dynamic, 1> m(n);
-        for (int i = 0; i < m.size(); i ++)
-          m(i) = 0.0;
-        Eigen::Matrix<T_lp, Eigen::Dynamic, Eigen::Dynamic> C(n, n);
-        for (int i = 0; i < C.rows(); i ++) {
-          for (int j = 0; j < C.cols(); j ++) {          
-            if (i == j) {
-              C(i, j) = 1e7;
-            } else {
-              C(i, j) = 0.0;
-            }
-          }
-        }
 
         T_lp f;
         T_lp Q;
@@ -323,17 +313,18 @@ namespace stan {
         T_lp e;
         Eigen::Matrix<T_lp, Eigen::Dynamic, 1> A(n);
         Eigen::Matrix<T_lp, Eigen::Dynamic, 1> Fj(n);
-        Eigen::Matrix<T_lp, Eigen::Dynamic, 1> m1(n);
-        Eigen::Matrix<T_lp, Eigen::Dynamic, Eigen::Dynamic> C1(n, n);
+        Eigen::Matrix<T_lp, Eigen::Dynamic, 1> m(n);
+        Eigen::Matrix<T_lp, Eigen::Dynamic, Eigen::Dynamic> C(n, n);
+
+        m = m0;
+        C = C0;
         
         for (int i = 0; i < y.cols(); i++) {
           // Predict state
           // reuse m and C instead of using a and R
           // eval to avoid any aliasing issues with Eigen (?)
-          m1 = multiply(G, m); 
-          m = m1;
-          C1 = add(quad_form_sym(C, transpose(G)), W);
-          C = C1;
+          m = multiply(G, m).eval();
+          C = add(quad_form_sym(C, transpose(G)), W).eval();
           for (int j = 0; j < y.rows(); ++j) {
             // predict observation
             T_lp yij(y(j, i));
@@ -366,16 +357,19 @@ namespace stan {
 
     template <typename T_y, 
               typename T_F, typename T_G,
-              typename T_V, typename T_W
+              typename T_V, typename T_W,
+              typename T_m0, typename T_C0
               >
     inline
-    typename boost::math::tools::promote_args<T_y,T_F,T_G,T_V,T_W>::type
+    typename boost::math::tools::promote_args<T_y, typename boost::math::tools::promote_args<T_F,T_G,T_V,T_W>::type >::type
     gaussian_dlm_log(const Eigen::Matrix<T_y,Eigen::Dynamic,Eigen::Dynamic>& y,
                      const Eigen::Matrix<T_F,Eigen::Dynamic,Eigen::Dynamic>& F,
                      const Eigen::Matrix<T_G,Eigen::Dynamic,Eigen::Dynamic>& G,
                      const Eigen::Matrix<T_V,Eigen::Dynamic,1>& V,
-                     const Eigen::Matrix<T_W,Eigen::Dynamic,Eigen::Dynamic>& W) {
-      return gaussian_dlm_log<false>(y, F, G, V, W);
+                     const Eigen::Matrix<T_W,Eigen::Dynamic,Eigen::Dynamic>& W,
+                     const Eigen::Matrix<T_m0,Eigen::Dynamic,1>& m0,
+                     const Eigen::Matrix<T_C0,Eigen::Dynamic,Eigen::Dynamic>& C0) {
+      return gaussian_dlm_log<false>(y, F, G, V, W, m0, C0);
     }
   }    
 

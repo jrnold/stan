@@ -33,10 +33,12 @@ TEST(ProbDistributionsGaussianDLM,LoglikeUU) {
   W << 0.461487989960454;
   Matrix<double, Dynamic, Dynamic> y(1, 10);
   y << 0.435794268894196, 1.22755796113506, 0.193264580222731, 1.76021889445093, 1.6470149263738, 0.059988547306031, -0.4980979884018, 1.77794742623532, -0.435458536090977, 1.1733293160216;
-  Matrix<double, Dynamic, 1> m0 = MatrixXd::Zero(1);
-  Matrix<double, Dynamic, 1> C0 = MatrixXd::Constant(1e7);  double ll_expected = -21.0504107180498;
+  Matrix<double, Dynamic, 1> m0 = Matrix<double, Dynamic, 1>::Zero(1, 1);
+  Matrix<double, Dynamic, Dynamic> C0(1, 1);
+  C0(0, 0) = 1e7;
+  double ll_expected = -21.0504107180498;
 
-  double lp_ref = gaussian_dlm_log(y, FF, GG, V, W);
+  double lp_ref = gaussian_dlm_log(y, FF, GG, V, W, m0, C0);
   EXPECT_FLOAT_EQ(lp_ref, ll_expected);
 }
 
@@ -51,8 +53,8 @@ TEST(ProbDistributionsGaussianDLM,LoglikeMM) {
   W << 2.24277594357501,-1.65863136283477,-1.65863136283477,6.69010664813895;
   Matrix<double, Dynamic, Dynamic> y(3, 10);
   y << 0.663454889128383, 1.84506567787219, -0.887054506009854, -2.41521382778332, 3.70875481434455, -4.55234499588754, -0.605128307725781, 1.37074056153151, -2.12107763131894, 2.24236743746261, 0.386569006173759, 3.91825641599579, 3.33368860016417, -0.469849046245645, -2.19806833413509, -1.45754611697235, 2.32377488296413, 4.8514565931381, -3.3192402890674, -4.86325482585216, -1.29504029175967, -1.15116681671907, -1.20273925104474, -2.53276712020605, -1.06306293348278, -2.38535359596865, 0.693389700056057, -3.25137196974247, 1.32287059182635, 0.745762191888096;
-  Matrix<double, Dynamic, 1> m0 = MatrixXd::Zero(2);
-  Matrix<double, Dynamic, 1> C0 = MatrixXd::Identity(2, 2) * 1e7;
+  Matrix<double, Dynamic, 1> m0 = Matrix<double, Dynamic, 1>::Zero(2,1);
+  Matrix<double, Dynamic, Dynamic> C0 = MatrixXd::Identity(2, 2) * 1e7;
   double ll_expected = -90.0322237154493;
   
   double lp_ref = gaussian_dlm_log(y, FF, GG, V, W, m0, C0);
@@ -99,7 +101,7 @@ TEST(ProbDistributionsGaussianDLM,Sizing) {
   Matrix<double, Dynamic, Dynamic> V = MatrixXd::Identity(3, 3);
   Matrix<double, Dynamic, Dynamic> W = MatrixXd::Identity(2, 2);
   Matrix<double, Dynamic, Dynamic> y = MatrixXd::Random(3, 5);
-  Matrix<double, Dynamic, 1> m0 = MatrixXd::Random(2);
+  Matrix<double, Dynamic, 1> m0 = Matrix<double, Dynamic, 1>::Random(2);
   Matrix<double, Dynamic, Dynamic> C0 = MatrixXd::Identity(2,2);
 
   // Check F
@@ -120,16 +122,13 @@ TEST(ProbDistributionsGaussianDLM,Sizing) {
   EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V, W, m0, C0), std::domain_error);
   // negative
   V(0, 2) = -1;
-  EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V, W, m0, Co), std::domain_error);
+  EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V, W, m0, C0), std::domain_error);
   // wrong size
   Matrix<double, Dynamic, Dynamic> V1 = MatrixXd::Identity(2, 2);
   EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V1, W, m0, C0), std::domain_error);
-  // wrong size vector
-  Matrix<double, Dynamic, 1L> V2(4);
-  EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V2, W), std::domain_error);  
   // not square
   Matrix<double, Dynamic, Dynamic> V3 = MatrixXd::Identity(2, 3);
-  EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V3, W), std::domain_error);
+  EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V3, W, m0, C0), std::domain_error);
 
   //Not symmetric
   W(0, 1) = 1;
@@ -145,7 +144,7 @@ TEST(ProbDistributionsGaussianDLM,Sizing) {
   EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V, W2, m0, C0), std::domain_error);
 
   // double
-  Matrix<double, Dynamic, Dynamic> m0::Zero(4);
+  Matrix<double, Dynamic, 1> m0_bad = Matrix<double, Dynamic, 1>::Zero(4, 1);
   EXPECT_THROW(gaussian_dlm_log(y, FF, GG, V, W, m0_bad, C0), std::domain_error);
 
 
