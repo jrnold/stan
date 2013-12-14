@@ -568,7 +568,7 @@ Markov chain being written to a file in comma-separated value (CSV) format.
 The default name of the output file is \nolinkurl{samples.csv}.
 
 The first part of the output file just repeats the parameters
-as comments (i.e., lines beginning with the pound sign (\Verb|#|)).
+as comments (i.e., lines beginning with the pound sign (\verb|#|)).
 %
 \begin{quote}
 \begin{Verbatim}[fontsize=\small]
@@ -630,21 +630,21 @@ The single model parameter \code{theta} is stored in the fourth column.
 \begin{tabular}{l|l|l}
 {\it Sampler} & {\it Parameter} & {\it Description} 
 \\ \hline \hline
-\HMC & \Verb| accept_stat__ | &  Metropolis acceptance probability
+\HMC & \verb| accept_stat__ | &  Metropolis acceptance probability
 \\
-\HMC & \Verb| stepsize__  | & Integrator step size
+\HMC & \verb| stepsize__  | & Integrator step size
 \\
-\HMC & \Verb| int_time__  | & Total integration time
+\HMC & \verb| int_time__  | & Total integration time
 \\
-\NUTS & \Verb| accept_stat__  | & Metropolis acceptance probability
+\NUTS & \verb| accept_stat__  | & Metropolis acceptance probability
 \\
 & & averaged over samples in the slice 
 \\
-\NUTS & \Verb| stepsize__ | & Integrator step size
+\NUTS & \verb| stepsize__ | & Integrator step size
 \\
-\NUTS & \Verb| treedepth__  | & Tree depth
+\NUTS & \verb| treedepth__  | & Tree depth
 \\
-\NUTS & \Verb| n_divergent__  | & Number of divergent iterations
+\NUTS & \verb| n_divergent__  | & Number of divergent iterations
 \\
 \end{tabular}
 \end{center}
@@ -954,5 +954,6 @@ but reduces its execution time.
 of memory with the default compiler, \code{g++}.  It is faster
 to run the Clang compiler (option \code{CC=clang++}), and to run in
 multiple threads (option \code{-j4} for four threads).
+
 
 

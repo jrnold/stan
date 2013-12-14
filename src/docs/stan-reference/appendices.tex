@@ -325,7 +325,7 @@ install wizard, then proceed through its options.
 \item \emph{Language}: select language, click \code{Next},
 \item \emph{Welcome}: click \code{Next},
 \item \emph{Information}: click \code{Next},
-\item \emph{Setup Location}: accept default (\Verb|c:\Rtools|), click \code{Next},
+\item \emph{Setup Location}: accept default (\verb|c:\Rtools|), click \code{Next},
 \item \emph{Select Components}: select default, \code{Package
    Authoring}, click \code{Next},
 \item \emph{Select Additional Tasks}: check \code{Edit Path} and \code{Save
@@ -421,17 +421,17 @@ Cygwin, but that is what you should be using for Stan anyway.
 \item Kill all Cygwin bash shells and shut down R.
 \item After installing R and Rtools, make sure that R and Rtools are
   in the \code{PATH} environment variable. My R installation directory was
-  \Verb|c:\Program Files\R\R-3.0.1| and my Rtools installation
-  directory was \Verb|c:\Rtools|, so I added the following to the end
+  \verb|c:\Program Files\R\R-3.0.1| and my Rtools installation
+  directory was \verb|c:\Rtools|, so I added the following to the end
   of my user \code{PATH} variable:
   \begin{itemize}
-  \item \Verb|C:\Program Files\R\R-3.0.1\bin\x64|
-  \item \Verb|C:\Rtools\bin|
-  \item \Verb|C:\Rtools\gcc-4.6.3\bin|
+  \item \verb|C:\Program Files\R\R-3.0.1\bin\x64|
+  \item \verb|C:\Rtools\bin|
+  \item \verb|C:\Rtools\gcc-4.6.3\bin|
   \end{itemize}
 \item Now there could be a conflict between Cygwin and Rtools when
   running a bash shell under Cygwin, so I added the following lines to
-  my \Verb|.bash_profile| file to remove any \code{PATH} directory
+  my \verb|.bash_profile| file to remove any \code{PATH} directory
   referencing Rtools:
   \begin{Verbatim}
 > TMP=`echo $PATH | /usr/bin/tr ':' '\n'                      \
@@ -444,14 +444,14 @@ after a return.)  This was only necessary to allow me to continue
 using Cygwin.
 \item Apparently there is something in \code{Rcpp} or \code{inline} or
   \code{rstan} that doesn't like \code{UNC} paths. My home directory
-  was \Verb|\\server\users\kevinv| and apparently this caused my
-  local R library directory to be \Verb|\server\users\kevinv\R|
+  was \verb|\\server\users\kevinv| and apparently this caused my
+  local R library directory to be \verb|\server\users\kevinv\R|
   as verified by \code{.libPaths()} from the R command prompt. 
 
   I fixed this by copying the entire directory tree rooted at
-  \Verb|\server\users\kevinv\R| over to a local directory on my workstation,
-  \Verb|C:\Users\KevinV\R|, then adding the user environment variable
-  \Verb|R_LIBS_USER=C:\Users\KevinV\R|. I shut down R and restarted it.
+  \verb|\server\users\kevinv\R| over to a local directory on my workstation,
+  \verb|C:\Users\KevinV\R|, then adding the user environment variable
+  \verb|R_LIBS_USER=C:\Users\KevinV\R|. I shut down R and restarted it.
 \item At this point the instructions given for installing Rstan
   finally worked.
 \end{enumerate}
@@ -763,7 +763,7 @@ add the path to the Doxygen executable,
 %
 to the system \code{PATH} environment variable.  You can do add to the
 \code{PATH} environment by adding this line to the end of the
-top-level \Verb|~/.profile| file.  
+top-level \verb|~/.profile| file.  
 %
 \begin{quote}
 \begin{Verbatim}[fontsize=\small]
@@ -814,14 +814,14 @@ selecting the following menu items.
 To verify that \gpp is installed, use the following command.
 %
 \begin{quote}
-  \Verb|> g++ -v|
+  \verb|> g++ -v|
 \end{quote}
 %
 This should report version information for \gpp.  Next, verify that
 \code{make} is installed with the following command.
 %
 \begin{quote}
-  \Verb|> make -v|
+  \verb|> make -v|
 \end{quote}
 %
 This should print version information for make.
@@ -1298,7 +1298,7 @@ model { }
 \end{Verbatim}
 \end{quote}
 % \item You can also define some improper models in \BUGS directly, for
-%   example, \Verb|p ~ beta (0, 0);| Remember how Stan works:
+%   example, \verb|p ~ beta (0, 0);| Remember how Stan works:
 %   lines in the model are executables that correspond directly to
 %   factors in the posterior density.  So you can define beta(0,0), it's
 %   simply a mathematical function.  Stan doesn't "care" if it has a
@@ -1437,9 +1437,9 @@ more informatively, \code{.data.R}.
 
 The recommended variable naming is to follow C/\Cpp naming
 conventions, in which variables are lowercase, with the underscore
-character (\Verb|_|) used as a separator.  Thus it is preferred to use
-\Verb|sigma_y|, rather than the run together \Verb|sigmay|, camel-case
-\Verb|sigmaY|, or capitalized camel-case \Verb|SigmaY|.  Even matrix
+character (\verb|_|) used as a separator.  Thus it is preferred to use
+\verb|sigma_y|, rather than the run together \verb|sigmay|, camel-case
+\verb|sigmaY|, or capitalized camel-case \verb|SigmaY|.  Even matrix
 variables should be lowercased.
 
 The exception to the lowercasing recommendation, which also follows

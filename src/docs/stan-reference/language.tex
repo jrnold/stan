@@ -1675,19 +1675,19 @@ tabular form in \reffigure{operator-precedence}.
 \\ \hline \hline
 \code{||} & 9 & left & binary infix & logical or
 \\ \hline
-\Verb|&&| & 8 & left & binary infix & logical and
+\verb|&&| & 8 & left & binary infix & logical and
 \\ \hline
-\Verb|==| & 7 & left & binary infix & equality
+\verb|==| & 7 & left & binary infix & equality
 \\
-\Verb|!=| & 7 & left & binary infix & inequality
+\verb|!=| & 7 & left & binary infix & inequality
 \\ \hline
-\Verb|<| & 6 & left & binary infix & less than
+\verb|<| & 6 & left & binary infix & less than
 \\
-\Verb|<=| & 6 & left & binary infix & less than or equal
+\verb|<=| & 6 & left & binary infix & less than or equal
 \\
-\Verb|>| & 6 & left & binary infix & greater than 
+\verb|>| & 6 & left & binary infix & greater than 
 \\
-\Verb|>=| & 6 & left & binary infix & greater than or equal
+\verb|>=| & 6 & left & binary infix & greater than or equal
 \\ \hline
 \code{+} & 5 & left & binary infix & addition
 \\
@@ -1697,7 +1697,7 @@ tabular form in \reffigure{operator-precedence}.
 \\
 \code{/} & 4 & left & binary infix & (right) division
 \\ \hline
-\Verb|\| & 3 & left & binary infix & left division
+\verb|\| & 3 & left & binary infix & left division
 \\ \hline
 \code{.*} & 2 & left & binary infix & elementwise multiplication
 \\
@@ -2921,7 +2921,7 @@ for (n in 1:N)
 %
 The problem is that the body of the for loop is taken to be the
 statement directly following it, which is 
-\Verb|y[n] ~ normal(mu,sigma)|.  This leaves the probability statement for
+\verb|y[n] ~ normal(mu,sigma)|.  This leaves the probability statement for
 \code{z[n]} hanging, as is clear from the following equivalent
 program.
 %
@@ -3106,10 +3106,10 @@ step, and the \code{generated quantities} block once per iteration.
 \subsection{String Literals}
 
 String literals begin and end with a double quote character
-(\Verb|"|).  The characters between the double quote characters may be
+(\verb|"|).  The characters between the double quote characters may be
 the space character or any visible ASCII character, with the exception
-of the backslash character (\Verb|\|) and double quote character
-(\Verb|"|).  The full list of visible ASCII characters is as follows.
+of the backslash character (\verb|\|) and double quote character
+(\verb|"|).  The full list of visible ASCII characters is as follows.
 %
 \begin{quote}
 \begin{Verbatim}
@@ -3146,13 +3146,13 @@ may be used anywhere whitespace is allowed in a Stan program.
 \subsection{Line-Based Comments}
 
 In line-based comments, any text on a line following
-two forward slashes (\Verb|//|) or the pound sign (\Verb|#|)
+two forward slashes (\verb|//|) or the pound sign (\verb|#|)
 is ignored (along with the slashes or pound sign).  
 
 \subsection{Bracketed Comments}
 
 For bracketed comments, any text between a forward-slash and asterisk
-pair (\Verb|/*|) and an asterisk and forward-slash pair (\Verb|*/|) is
+pair (\verb|/*|) and an asterisk and forward-slash pair (\verb|*/|) is
 ignored.
 
 \subsection{Character Encoding}

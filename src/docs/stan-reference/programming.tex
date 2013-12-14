@@ -872,7 +872,7 @@ model {
 \end{Verbatim}
 \end{quote}
 %
-For the observed values in \Verb|y_obs|, the normal sampling model is
+For the observed values in \verb|y_obs|, the normal sampling model is
 used without truncation.  The log probability is directly incremented
 using the calculated log cumulative normal probability of the censored
 data items.  The built-in function \code{log1m} is used, which maps
@@ -4732,7 +4732,7 @@ model {
 \end{Verbatim}
 \end{quote}
 %
-In this second model, the parameters \Verb|x_raw| and \Verb|y_raw| are
+In this second model, the parameters \verb|x_raw| and \verb|y_raw| are
 sampled as independent unit normals, which is easy for Stan.  These
 are then transformed into samples from the funnel.  In this case, the
 same transform may be used to define Monte Carlo samples directly
@@ -4953,17 +4953,17 @@ model {
 \end{quote}
 %
 Although not shown, a full model will have priors on both
-\Verb|mu_beta| and \Verb|sigma_beta| along with data modeled based on
+\verb|mu_beta| and \verb|sigma_beta| along with data modeled based on
 these coefficients.  For instance, a standard binary logistic
 regression with data matrix \code{x} and binary outcome vector
 \code{y} would include a likelihood statement such as form
-\Verb|y ~ bernoulli_logit(x * beta)|, leading to an analytically
+\verb|y ~ bernoulli_logit(x * beta)|, leading to an analytically
 intractable posterior.
 
 A hierarchical model such as the above will suffer from the same kind
 of inefficiencies as Neal's funnel, though typically not so extreme,
-because the values of \Verb|beta|, \Verb|mu_beta| and
-\Verb|sigma_beta| are highly correlated in the posterior.  Such a
+because the values of \verb|beta|, \verb|mu_beta| and
+\verb|sigma_beta| are highly correlated in the posterior.  Such a
 hierarchical model can be made much more efficient in terms of
 effective sample size by reparameterizing in exactly the same way as
 the funnel example.
@@ -4983,7 +4983,7 @@ model {
 \end{Verbatim}
 \end{quote}
 %
-Any priors defined for \Verb|mu_beta| and \Verb|sigma_beta| remain as
+Any priors defined for \verb|mu_beta| and \verb|sigma_beta| remain as
 defined in the original model.
 
 Reparameterization of hierarchical models is not limited to the normal
@@ -5046,9 +5046,9 @@ model {
 \end{Verbatim}
 \end{quote}
 %
-In this case \Verb|mu| and \Verb|Sigma| are fixed data, but they could
+In this case \verb|mu| and \verb|Sigma| are fixed data, but they could
 be unknown parameters, in which case their priors would be unaffected
-by a reparameterization of \Verb|beta|.
+by a reparameterization of \verb|beta|.
 
 If $\alpha$ has the same dimensions as $\beta$ but the elements of 
 $\alpha$ are independently and identically distributed standard normal 
@@ -5083,8 +5083,8 @@ model {
 \end{quote}
 %
 This reparameterization is more efficient for two reasons. First, it
-reduces dependence among the elements of \Verb|alpha| and second, it
-avoids the need to invert \Verb|Sigma| every time \Verb|multi_normal|
+reduces dependence among the elements of \verb|alpha| and second, it
+avoids the need to invert \verb|Sigma| every time \verb|multi_normal|
 is evaluated.
 
 The Cholesky factor is also useful when a covariance matrix is 
@@ -5096,9 +5096,9 @@ a diagonal matrix of standard deviations and the Cholesky factor of
 the correlation matrix. Furthermore, the product of a diagonal matrix
 of standard deviations and a vector is equal to the elementwise
 product between the standard deviations and that vector. Thus, if for
-example the correlation matrix \Verb|Tau| were fixed data but the
-vector of standard deviations \Verb|sigma| were unknown parameters,
-then a reparameterization of \Verb|beta| in terms of \Verb|alpha|
+example the correlation matrix \verb|Tau| were fixed data but the
+vector of standard deviations \verb|sigma| were unknown parameters,
+then a reparameterization of \verb|beta| in terms of \verb|alpha|
 could be implemented as follows.
 %
 \begin{quote}
@@ -5194,12 +5194,12 @@ model {
 \end{quote}
 %
 This reparameterization is more efficient for three reasons. First, it
-reduces dependence among the elements of \Verb|z| and second, it
+reduces dependence among the elements of \verb|z| and second, it
 avoids the need to invert the covariance matrix, $W$ every time 
-\Verb|wishart| is evaluated. Third, if $W$ is to be used with a
+\verb|wishart| is evaluated. Third, if $W$ is to be used with a
 multivariate normal distribution, you can pass $L A$ to the more
-efficient \Verb|multi_normal_cholesky| function, rather than passing
-$W$ to \Verb|multi_normal|.
+efficient \verb|multi_normal_cholesky| function, rather than passing
+$W$ to \verb|multi_normal|.
 
 If $W$ is distributed Wishart with scale matrix $S$ and degrees of
 freedom $\nu$, then $W^{-1}$ is distributed inverse Wishart with inverse
@@ -5341,7 +5341,7 @@ apply the \code{sum()} operator, as in the following refactoring.
 \end{quote}
 %
 Syntactically, the replacement is a statement block delineated
-by curly brackets (\Verb|{|, \Verb|}|), starting with the definition
+by curly brackets (\verb|{|, \verb|}|), starting with the definition
 of the local variable \code{summands}.
 
 Even though it involves extra work to allocate the \code{summands}
