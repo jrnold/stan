@@ -29,6 +29,7 @@
 #include <stan/math/rep_vector.hpp>
 #include <stan/math/rep_row_vector.hpp>
 #include <stan/math/rep_matrix.hpp>
+#include <stan/math/identity.hpp>
 
 #include <stan/model/prob_grad.hpp>
 #include <stan/prob/distributions.hpp>
