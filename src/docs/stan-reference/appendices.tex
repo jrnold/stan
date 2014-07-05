@@ -97,6 +97,233 @@ example volumes, all translated and tested (to provide the same
 answers as \BUGS) in Stan.  For any particular model you want to fit,
 you can look for similar structures in these examples.
 
+
+\begin{table}
+  \begin{tabular}{lll}
+Beta & \code{dbeta(a, b)} & \code{beta(a, b)} \\
+Chi-Square & \code{dchisqr(k)} & \code{chi\_square(k)} \\
+Double Exponential & \code{ddexp(mu, tau)} & \code{double\_exponential(mu, 1.0 / tau)} \\
+Exponential & \code{dexp(lambda)} &  \code{exponential(lambda)} \\
+F & \code{df(n, m)} & \code{df(n, m, 0.0, 1.0)} \\
+Flat & \code{dflat()} &  \\
+Gamma & \code{dgamma(r, lambda)} & \code{gamma(r, lambda)} \\
+Generalized Extreme Value & \code{dgev(mu, sigma, eta)} &  \\
+Generalized F & \code{df(n, m, mu, tau)} &  \\
+Generalized Gamma & \code{dgen.gamma(r, lambda, b)} & \code{dggamma(r, lambda, b)} \\
+Generalized Pareto & \code{dgpar(mu, sigma, eta)} & \\
+Logistic & \code{dlogis(mu, tau)} & \code{logistic(mu, 1.0 / tau)} \\
+Non-central Chi-square &  \code{dnchisqr(k, delta)} &  \\
+Log-Normal & \code{dlnorm(mu, tau)} & \code{log\_normal(mu, pow(tau, -0.5))} \\
+Normal &  \code{dnorm(mu, tau)} & \code{normal(mu, pow(tau, -0.5))} \\
+Pareto & \code{dpar(alpha, c)} & \code{pareto(pow(c, alpha), alpha)}\\
+Student-t & \code{dt(mu, tau, k)} & \code{student\_t(k, mu, pow(tau, -0.5))} \\
+Uniform & \code{dunif(a, b)} & \code{uniform(a, b)} \\
+Weibull & \code{dweib(v, lambda)} & \code{weibull(v, pow(lambda, -1.0 / v))}
+  \end{tabular}
+\end{table}
+
+
+% \setlength{\DUtablewidth}{\linewidth}
+% \begin{longtable*}[c]{|p{0.244\DUtablewidth}|p{0.224\DUtablewidth}|p{0.224\DUtablewidth}|p{0.258\DUtablewidth}|}
+% \hline
+% \textbf{%
+% Name
+% } & \textbf{%
+% JAGS
+% } & \textbf{%
+% OpenBUGS
+% } & \textbf{%
+% Stan
+% } \\
+% \hline
+% \endfirsthead
+% \hline
+% \textbf{%
+% Name
+% } & \textbf{%
+% JAGS
+% } & \textbf{%
+% OpenBUGS
+% } & \textbf{%
+% Stan
+% } \\
+% \hline
+% \endhead
+% \multicolumn{4}{c}{\hfill ... continued on next page} \\
+% \endfoot
+% \endlastfoot
+
+% \emph{Beta binomial}
+%  & 
+% \texttt{dbetabin(a, b, n)}
+%  &  & 
+% \texttt{beta\_binomial(n, a, b)}
+%  \\
+% \hline
+
+% Bernoulli
+%  & 
+% \texttt{dbern(p)}
+%  & 
+% \texttt{dbern(p)}
+%  & 
+% \texttt{bernoulli(p)}
+%  \\
+% \hline
+
+% \emph{Binomial}
+%  & 
+% \texttt{dbin(p, n)}
+%  & 
+% \texttt{dbin(p, n)}
+%  & 
+% \texttt{binomial(n, p)}
+%  \\
+% \hline
+
+% Categorical
+%  & 
+% \texttt{dcat(pi)}
+%  & 
+% \texttt{dcat(pi{[}{]})}
+%  & 
+% \texttt{categorical(pi)}
+%  \\
+% \hline
+
+% \emph{Hypergeometric}
+%  & 
+% \texttt{dhyper(n1, n2, m1, 1.0)}
+%  & 
+% \texttt{dhyper(n1, n2, m1, 1.0)}
+%  & 
+% \texttt{hypergeometric(m1, n1, n2)}
+%  \\
+% \hline
+
+% \textbf{Non-central Hypergeometric}
+%  & 
+% \texttt{dhyper(n1, n2, m1, psi}
+%  & 
+% \texttt{dhyper(n1, n2, m1, psi)}
+%  &  \\
+% \hline
+
+% \emph{Negative Binomial}
+%  & 
+% \texttt{dnegbin(p, r)}
+%  & 
+% \texttt{dnegbin(p, r)}
+%  & 
+% \texttt{neg\_binomial(r, p / (1 - p))}
+%  \\
+% \hline
+
+% Poisson
+%  & 
+% \texttt{dpois(lambda)}
+%  & 
+% \texttt{dpois(lambda)}
+%  & 
+% \texttt{poisson(lambda)}
+%  \\
+% \hline
+% \end{longtable*}
+
+
+% \setlength{\DUtablewidth}{\linewidth}
+% \begin{longtable*}[c]{|p{0.208\DUtablewidth}|p{0.187\DUtablewidth}|p{0.222\DUtablewidth}|p{0.334\DUtablewidth}|}
+% \hline
+% \textbf{%
+% Name
+% } & \textbf{%
+% JAGS
+% } & \textbf{%
+% OpenBUGS
+% } & \textbf{%
+% Stan
+% } \\
+% \hline
+% \endfirsthead
+% \hline
+% \textbf{%
+% Name
+% } & \textbf{%
+% JAGS
+% } & \textbf{%
+% OpenBUGS
+% } & \textbf{%
+% Stan
+% } \\
+% \hline
+% \endhead
+% \multicolumn{4}{c}{\hfill ... continued on next page} \\
+% \endfoot
+% \endlastfoot
+
+% Dirichlet
+%  & 
+% \texttt{ddirch(alpha)}
+%  & 
+% \texttt{ddirich(alpha{[}{]})}
+%  & 
+% \texttt{dirichlet(alpha)}
+%  \\
+% \hline
+
+% \emph{Multivariate normal}
+%  & 
+% \texttt{dmnorm(mu, Omega)}
+%  & 
+% \texttt{dmnorm(mu{[}{]}, Omega{[},{]})}
+%  & 
+% \texttt{multi\_normal\_prec(mu, Omega)}
+%  \\
+% \hline
+
+% \emph{Wishart}
+%  & 
+% \texttt{dwish(R, k)}
+%  & 
+% \texttt{dwish(R{[},{]}, k)}
+%  & 
+% \texttt{wishart(k, R)}
+%  \\
+% \hline
+
+% \emph{Multivariate Student t}
+%  & 
+% \texttt{dmt(mu, Omega, k)}
+%  & 
+% \texttt{dmt(mu{[}{]}, Omega{[},{]}, k)}
+%  & 
+% \texttt{multi\_student\_t(k, mu, inverse(Omega))}
+%  \\
+% \hline
+
+% \emph{Multinomial}
+%  & 
+% \texttt{dmulti(pi, n)}
+%  & 
+% \texttt{dmulti(pi{[}{]}, n)}
+%  & 
+% \texttt{multinomial(pi * n)}
+%  \\
+% \hline
+% \end{longtable*}
+% %
+% \DUfootnotetext{id3}{id1}{1}{%
+% If no distribution is assigned to a parameter in Stan, it is assigned
+% an improper uniform prior.
+% }
+% %
+% \DUfootnotetext{id4}{id2}{2}{%
+% Generic distributions are implemented in Stan by directly altering
+% the value of \texttt{lp\_\_}. See “Chapter 12: Custom Probability Functions”
+% in the \emph{Stan Manual}.
+% }
+
+
 \section{Some Differences in How BUGS and Stan Work}
 
 \begin{itemize}
