@@ -43,6 +43,9 @@ EXE =
 WINE =
 PATH_SEPARATOR = /
 
+## FLAGS for latex
+LATEX = pdflatex
+MANUAL_FLAGS = -interaction nonstopmode -file-line-error
 
 ##
 # Get information about the compiler used.

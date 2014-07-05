@@ -12,5 +12,5 @@ manual: $(STAN_HOME)src/docs/stan-reference/stan-reference.pdf
 
 MANUAL_FLAGS=
 %.pdf: %.tex
-	cd $(dir $@); pdflatex $(MANUAL_FLAGS) $(notdir $^); bibtex $(notdir $(basename $@)); makeindex -s stan-reference.ist $(notdir $(basename $@)); pdflatex $(MANUAL_FLAGS) $(notdir $^); pdflatex $(MANUAL_FLAGS) $(notdir $^);  pdflatex $(MANUAL_FLAGS) $(notdir $^);
+	cd $(dir $@); $(LATEX) $(MANUAL_FLAGS) $(notdir $^); bibtex $(notdir $(basename $@)); makeindex -s stan-reference.ist $(notdir $(basename $@)); $(LATEX) $(MANUAL_FLAGS) $(notdir $^); $(LATEX) $(MANUAL_FLAGS) $(notdir $^);  $(LATEX) $(MANUAL_FLAGS) $(notdir $^);
 
